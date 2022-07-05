@@ -29,19 +29,19 @@ let cart = []
 let list = document.querySelector('#items')
 
 //for (let i = 0; i < items.length; i++) {
-//    console.log(items[i].name)
+//  console.log(items[i].name)
 //}
 // another way to do for
 
 items.forEach((item, i) => {
 
     list.innerHTML += `<li>
-        <div>Name: ${item.name}</div>
-        <div>price: ${item.price}</div>
-        <img src="${item.image}" />
-        <input type="number" placeholder="quantity" onchange="inputChange(${i}, '${item.name}', '${item.price}', '${item.image}')" />
-        <button>Buy Item</button>
-        </li>`
+    <div>${item.name}</div>
+    <div>$ ${item.price}</div>
+    <img src="${item.image}" />
+    <input id="qty" type="number" placeholder="qty" onchange="inputChange(${i}, '${item.name}', '${item.price}', '${item.image}')" />
+    <button id="buyBtn">Buy Item</button>
+    </li>`
 })
 
 function showCart() {
@@ -51,20 +51,24 @@ function showCart() {
     cart.forEach((item, i) => {
         grandTotal += item.price * item.quantity
         cartItems.innerHTML += `<li>
-            <div>Name: ${item.name}</div>
-            <div>Quantity: ${item.quantity}</div>
-            <img src="${item.image}" />
-            </li>`
+      <div>${item.name}</div>
+      <div>Quantity: ${item.quantity}</div>
+      <img src="${item.image}" />
+      
+      </li>`
+
+
     })
 
     document.querySelector('#grandTotal').innerHTML = '$' + grandTotal
+
 }
 
 function inputChange(i, name, price, image) {
-    console.log('In function. whith parameter', i, name, price, image)
+
     let listItem = document.querySelectorAll('li')[i]
     let input = listItem.querySelector('input')
-    let button = listItem.querySelector('button');
+    let button = listItem.querySelector('#buyBtn');
 
     button.onclick = function() {
 
@@ -75,8 +79,5 @@ function inputChange(i, name, price, image) {
             image: image
         })
         showCart()
-
     }
-
-
 }
